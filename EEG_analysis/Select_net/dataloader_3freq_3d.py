@@ -22,8 +22,8 @@ seed = 20
 device = torch.device(("cuda:0") if torch.cuda.is_available() else "cpu")
 
 ### 1.数据集 ### Dataset
-data = np.load('/content/drive/MyDrive/ColabNotebooks/SEED-VIGfile/Toshi_net/processedData/data_3d_3freq_flat.npy')   # 20355  
-label = np.load('./processedData/label.npy')
+data = np.load('/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/processedData/data_3d_3freq_flat.npy')   # 20355  
+label = np.load('/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/processedData/label.npy')
 
 dataG = torch.FloatTensor(data)
 labelG = torch.FloatTensor(label)

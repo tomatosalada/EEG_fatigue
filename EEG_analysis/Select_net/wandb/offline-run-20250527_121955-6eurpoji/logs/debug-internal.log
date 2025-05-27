@@ -1,0 +1,16 @@
+{"time":"2025-05-27T12:19:55.418684859+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/wandb/offline-run-20250527_121955-6eurpoji/logs/debug-core.log"}
+{"time":"2025-05-27T12:19:55.521644774+09:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-05-27T12:19:55.522904791+09:00","level":"INFO","msg":"created new stream","id":"6eurpoji"}
+{"time":"2025-05-27T12:19:55.522919374+09:00","level":"INFO","msg":"stream: started","id":"6eurpoji"}
+{"time":"2025-05-27T12:19:55.522930822+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:19:55.522971451+09:00","level":"INFO","msg":"handler: started","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:19:55.523027722+09:00","level":"INFO","msg":"sender: started","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:19:55.526680506+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-27T12:38:35.46592288+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-27T12:38:35.46637626+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-27T12:38:35.466871187+09:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-05-27T12:38:35.470106335+09:00","level":"INFO","msg":"stream: closing","id":"6eurpoji"}
+{"time":"2025-05-27T12:38:35.470132268+09:00","level":"INFO","msg":"handler: closed","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:38:35.470154342+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:38:35.470179745+09:00","level":"INFO","msg":"sender: closed","stream_id":"6eurpoji"}
+{"time":"2025-05-27T12:38:35.470599933+09:00","level":"INFO","msg":"stream: closed","id":"6eurpoji"}
