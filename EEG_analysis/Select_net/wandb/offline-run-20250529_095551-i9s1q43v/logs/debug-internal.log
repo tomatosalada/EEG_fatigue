@@ -1,0 +1,16 @@
+{"time":"2025-05-29T09:55:51.520279631+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/wandb/offline-run-20250529_095551-i9s1q43v/logs/debug-core.log"}
+{"time":"2025-05-29T09:55:51.624148741+09:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-05-29T09:55:51.62593962+09:00","level":"INFO","msg":"created new stream","id":"i9s1q43v"}
+{"time":"2025-05-29T09:55:51.626015774+09:00","level":"INFO","msg":"stream: started","id":"i9s1q43v"}
+{"time":"2025-05-29T09:55:51.626102927+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T09:55:51.62617406+09:00","level":"INFO","msg":"sender: started","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T09:55:51.626166256+09:00","level":"INFO","msg":"handler: started","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T09:55:51.638966464+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-29T10:14:03.099273571+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-29T10:14:03.09981502+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-29T10:14:03.100855978+09:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-05-29T10:14:03.107195197+09:00","level":"INFO","msg":"stream: closing","id":"i9s1q43v"}
+{"time":"2025-05-29T10:14:03.107223564+09:00","level":"INFO","msg":"handler: closed","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T10:14:03.107237617+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T10:14:03.1072809+09:00","level":"INFO","msg":"sender: closed","stream_id":"i9s1q43v"}
+{"time":"2025-05-29T10:14:03.108053229+09:00","level":"INFO","msg":"stream: closed","id":"i9s1q43v"}

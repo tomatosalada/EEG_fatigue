@@ -1,0 +1,16 @@
+{"time":"2025-06-10T16:55:22.333524091+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/wandb/offline-run-20250610_165522-1l0752sc/logs/debug-core.log"}
+{"time":"2025-06-10T16:55:22.437514295+09:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-06-10T16:55:22.439161703+09:00","level":"INFO","msg":"created new stream","id":"1l0752sc"}
+{"time":"2025-06-10T16:55:22.439223542+09:00","level":"INFO","msg":"stream: started","id":"1l0752sc"}
+{"time":"2025-06-10T16:55:22.439327634+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"1l0752sc"}
+{"time":"2025-06-10T16:55:22.439380642+09:00","level":"INFO","msg":"sender: started","stream_id":"1l0752sc"}
+{"time":"2025-06-10T16:55:22.439439606+09:00","level":"INFO","msg":"handler: started","stream_id":"1l0752sc"}
+{"time":"2025-06-10T16:55:22.453765054+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-10T17:13:40.208057546+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-10T17:13:40.208101621+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-10T17:13:40.208624573+09:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-06-10T17:13:40.215061769+09:00","level":"INFO","msg":"stream: closing","id":"1l0752sc"}
+{"time":"2025-06-10T17:13:40.215101329+09:00","level":"INFO","msg":"handler: closed","stream_id":"1l0752sc"}
+{"time":"2025-06-10T17:13:40.215120753+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"1l0752sc"}
+{"time":"2025-06-10T17:13:40.215167454+09:00","level":"INFO","msg":"sender: closed","stream_id":"1l0752sc"}
+{"time":"2025-06-10T17:13:40.216351936+09:00","level":"INFO","msg":"stream: closed","id":"1l0752sc"}

@@ -48,6 +48,32 @@ def label_2class(a):
 
     else:
         raise TypeError("Unsupported type for 'a'")
+    
+def label_3class(a):
+    # a がテンソルの場合
+    if isinstance(a, torch.Tensor):
+        # 初期値として0で満たされたテンソルを作成
+        result = torch.zeros_like(a, dtype=torch.long)
+        # 0.35以上0.7以下の要素を1に設定
+        result[(a >= 0.35) & (a < 0.7)] = 1
+        # 0.7より大きい要素を2に設定
+        result[a > 0.7] = 2
+        return result
+
+    # a がリストやNumPy配列の場合
+    elif isinstance(a, (list, np.ndarray)):
+        result = []
+        for i in range(len(a)):
+            if a[i] < 0.35:
+                result.append(0)
+            elif 0.35 <= a[i] < 0.7:
+                result.append(1)
+            else:
+                result.append(2)
+        return result
+
+    else:
+        raise TypeError("Unsupported type for 'a'")
 
 
 # description: Evaluate the performance of the saved model　モデルの性能評価
@@ -59,9 +85,9 @@ def myEvaluate(true, pred):
     else:
         conf = confusion_matrix(true, pred)
         acc = accuracy_score(true, pred)
-        report = classification_report(true, pred, target_names=['Awake', 'Fatigue'])
-        pre = precision_score(true, pred)
-        recall = recall_score(true, pred)
+        report = classification_report(true, pred, target_names=['Awake', 'Fatigue', 'drowsy'])
+        pre = precision_score(true, pred, average="macro")
+        recall = recall_score(true, pred, average="macro")
         f1 = 2*(pre * recall)/(pre + recall)
         kappa = cohen_kappa_score(true, pred)
     return conf, acc, report, pre, recall, f1, kappa

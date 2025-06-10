@@ -1,0 +1,41 @@
+{
+  "os":  "Linux-5.15.0-79-generic-x86_64-with-glibc2.31",
+  "python":  "CPython 3.13.3",
+  "startedAt":  "2025-06-10T08:24:42.242193Z",
+  "program":  "/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/train_select_channel_cross.py",
+  "codePath":  "EEG_analysis/Select_net/train_select_channel_cross.py",
+  "git":  {
+    "remote":  "https://github.com/tomatosalada/EEG_fatigue.git",
+    "commit":  "9cbfd943829001bfe7c4c94fa11a161504fa5404"
+  },
+  "root":  "/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net",
+  "host":  "islabshi-MP-i1640",
+  "executable":  "/home/islab-shi/anaconda3/envs/EEG/bin/python",
+  "codePathLocal":  "train_select_channel_cross.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "gpu":  "NVIDIA GeForce RTX 2080 Ti",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "502392610816",
+      "used":  "277550546944"
+    }
+  },
+  "memory":  {
+    "total":  "67338661888"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 2080 Ti",
+      "memoryTotal":  "11811160064",
+      "cudaCores":  4352,
+      "architecture":  "Turing"
+    }
+  ],
+  "cudaVersion":  "11.8"
+}

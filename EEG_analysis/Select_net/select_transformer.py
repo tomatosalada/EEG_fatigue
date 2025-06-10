@@ -235,7 +235,8 @@ def remove_redundant_electrodes(attention_weights, electrode_attention):
 
     #threshold = mean_attention + std_attention
 
-    threshold = mean_attention - std_attention
+    threshold = mean_attention - std_attention/2
+    #threshold = 1
 
     print(threshold)
     # 閾値を超えた電極ペアを削除

@@ -81,8 +81,8 @@ for i in range(epoch):
         total_train_acc = 0
         train_step = 0
 
-        data = np.load('/content/drive/MyDrive/ColabNotebooks/SEED-VIGfile/Toshi_net/processedData/data_3d_3freq_flat.npy') 
-        label = np.load('./processedData/label.npy')
+        data = np.load('/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/processedData/data_3d_3freq_flat.npy') 
+        label = np.load('/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/processedData/label.npy')
 
         data = torch.FloatTensor(data)
         label = torch.FloatTensor(label)
@@ -102,8 +102,8 @@ for i in range(epoch):
             
             train_loss = loss_fn(outputs, y)
             # Calculate accuracy by toolbox.label_2class
-            label_train = label_2class(y.cpu())
-            label_train_pred = label_2class(outputs.cpu())
+            label_train = label_3class(y.cpu())
+            label_train_pred = label_3class(outputs.cpu())
             total_train_acc += accuracy_score(label_train, label_train_pred)
             
             # Gradient update
@@ -144,8 +144,8 @@ for i in range(epoch):
                 outputs, attention_weights_test, electrode_attention_test = myModel(testx)
                 #print(outputs.shape)
                 
-                label = label_2class(testy.cpu())
-                label_pred = label_2class(outputs.cpu())
+                label = label_3class(testy.cpu())
+                label_pred = label_3class(outputs.cpu())
                 test_loss = loss_fn(outputs, testy)
                 total_test_loss = total_test_loss + test_loss.item()
                 total_test_step = total_test_step + 1
@@ -189,7 +189,7 @@ for i in range(epoch):
         if (total_test_acc/len(test_dataloader)) > acc_low:
             acc_low = (total_test_acc/len(test_dataloader))
             # 保存ファイル
-            torch.save(myModel.state_dict(), f'/content/drive/MyDrive/ColabNotebooks/SEED-VIGfile/Toshi_net/pth/model_fold_%d_3freq_conformer_nnbest_cross_select_ave-std.pth' % n)
+            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_fold_%d_3freq__cross.pth' % n)
             # 冗長な電極を削除
             removed_electrodes, threshold = remove_redundant_electrodes(attention_weights_test, electrode_attention_test)
             print("Removed electrodes:", removed_electrodes)
@@ -213,7 +213,7 @@ for i in range(epoch):
         if (best_score > acc_max):
             acc_max = best_score
             # 保存ファイル
-            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_fold_3freq_cross.pth')
+            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_3freq_cross_mea-stdhalf.pth')
             
 
 print("This is the highest accuracy is: ", acc_low)
@@ -234,7 +234,7 @@ wandb.finish()
 # グラフの描画
 # Plot Training and Test Metrics
 plt.figure(figsize=(12, 5))  # Adjust figure size for better readability
-
+"""
 for i in range(5):
     fold_losses_train = epoch_train_losses[i::5]
     plt.plot(epochs[:len(fold_losses_train)], fold_losses_train, label=f'Training Loss (Fold {i+1})')
@@ -261,7 +261,7 @@ plt.title('Training and Test Accuracy')
 plt.legend()   
 plt.savefig('training_accuracy_cross_select.png')  # 画像ファイルとして保存
 plt.close()
-
+"""
 # 5分割交差検証のループ後、以下のように修正
 avg_epoch_train_losses = []
 for i in range(epoch):
@@ -282,16 +282,16 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.title('Training and Test Validation Loss')
 plt.legend()
-plt.savefig('avg_loss_plot_cross_select.png')
+plt.savefig('avg_loss_plot_cross_select_3class_1.png')
 plt.show()
 
 
-
+plt.figure(figsize=(10, 5))
 plt.plot(epochs, acc_mean_train, label='Training Accuracy')
 plt.plot(epochs, acc_mean_test, label='Test Accuracy', linestyle='--') # Dashed line for test
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
 plt.title('Training and Test Accuracy Cross Validation')
 plt.legend()   
-plt.savefig('avg_training_accuracy_cross_validation_select.png')  # 画像ファイルとして保存
+plt.savefig('avg_training_accuracy_cross_validation_select_3class_1.png')  # 画像ファイルとして保存
 plt.close()

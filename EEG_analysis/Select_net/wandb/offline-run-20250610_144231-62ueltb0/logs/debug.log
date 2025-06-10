@@ -1,0 +1,6 @@
+2025-06-10 14:42:31,429 INFO    MainThread:2335587 [wandb_init.py:setup_run_log_directory():724] Logging user logs to /workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/wandb/offline-run-20250610_144231-62ueltb0/logs/debug.log
+2025-06-10 14:42:31,429 INFO    MainThread:2335587 [wandb_init.py:setup_run_log_directory():725] Logging internal logs to /workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/Select_net/wandb/offline-run-20250610_144231-62ueltb0/logs/debug-internal.log
+2025-06-10 14:42:31,429 INFO    MainThread:2335587 [wandb_init.py:init():852] calling init triggers
+2025-06-10 14:42:31,430 INFO    MainThread:2335587 [wandb_init.py:init():857] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.002, 'dataset': 'SEED-VIG', 'epochs': 200, '_wandb': {}}
+2025-06-10 14:45:19,541 INFO    MsgRouterThr:2335587 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 0 handles.
