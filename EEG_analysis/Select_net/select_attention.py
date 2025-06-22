@@ -552,6 +552,7 @@ class select_net(nn.Module):
         self.conv3 = nn.Conv1d(64, 48, kernel_size=3, padding=1)
         self.batchnorm3 = nn.BatchNorm1d(48, False)
         self.conv4 = nn.Conv1d(48, 64, kernel_size=3, padding=1)
+        self.batchnorm4 = nn.BatchNorm1d(64, False)
         self.Atten = sfAttention(in_channels=17) 
         
         #transformer
