@@ -1,1 +1,2 @@
 *.npy
+EEG_analysis/processedData/*.npy
