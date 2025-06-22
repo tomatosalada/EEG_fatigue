@@ -1,4 +1,5 @@
-from select_transformer import *
+#from select_transformer import *
+from select_attention import *
 from toolbox import *
 #from visdom import Visdom
 import matplotlib.pyplot as plt
@@ -189,7 +190,7 @@ for i in range(epoch):
         if (total_test_acc/len(test_dataloader)) > acc_low:
             acc_low = (total_test_acc/len(test_dataloader))
             # 保存ファイル
-            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_fold_%d_3freq__cross.pth' % n)
+            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_fold_%d_3freq__cross_attention.pth' % n)
             # 冗長な電極を削除
             removed_electrodes, threshold = remove_redundant_electrodes(attention_weights_test, electrode_attention_test)
             print("Removed electrodes:", removed_electrodes)
@@ -213,7 +214,7 @@ for i in range(epoch):
         if (best_score > acc_max):
             acc_max = best_score
             # 保存ファイル
-            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_3freq_cross_mea-stdhalf.pth')
+            torch.save(myModel.state_dict(), f'/workspace-cloud/toshiki.ohno/EEG_fatigue/EEG_analysis/model_evaluation/model_3freq_cross_attention.pth')
             
 
 print("This is the highest accuracy is: ", acc_low)
@@ -282,7 +283,7 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.title('Training and Test Validation Loss')
 plt.legend()
-plt.savefig('avg_loss_plot_cross_select_3class_1.png')
+plt.savefig('avg_loss_plot_cross_select_3class_attention.png')
 plt.show()
 
 
@@ -293,5 +294,5 @@ plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
 plt.title('Training and Test Accuracy Cross Validation')
 plt.legend()   
-plt.savefig('avg_training_accuracy_cross_validation_select_3class_1.png')  # 画像ファイルとして保存
+plt.savefig('avg_training_accuracy_cross_validation_select_3class_attention.png')  # 画像ファイルとして保存
 plt.close()

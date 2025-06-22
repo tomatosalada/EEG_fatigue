@@ -471,6 +471,75 @@ class ClassificationHead(nn.Sequential):
         out = self.clshead(x)
         return out
 
+class spatialAttention(nn.Module):
+    def __init__(self, in_channels):
+        super().__init__()
+        self.Conv1x1 = nn.Conv2d(in_channels, 1, kernel_size=1, bias=False)
+        self.norm = nn.Sigmoid()
+
+    def forward(self, U):
+        q = self.Conv1x1(U)
+        spaAtten = q
+        spaAtten = torch.squeeze(spaAtten, 1)
+        q = self.norm(q)
+        # In addition, return to spaAtten for visualization
+        return U * q
+
+#shared MLP
+class sharedMLP(nn.Module):
+    def __init__(self, in_channels):
+        super(sharedMLP, self).__init__()
+        self.fc1 = nn.Linear(in_channels * 2, in_channels // 2)  # 隠れ層の次元は in_channels の半分
+        self.relu = nn.ReLU(inplace=True)
+        self.fc2 = nn.Linear(in_channels // 2, in_channels)
+
+    def forward(self, z_avg, z_max):
+        # 2つの入力を結合
+        z = torch.cat([z_avg, z_max], dim=1)  
+        # MLPに適用
+        z = self.fc1(z)
+        z = self.relu(z)
+        z = self.fc2(z)
+        return z
+
+class frequencyAttention(nn.Module):
+    def __init__(self, in_channels):
+        super().__init__()
+        self.avgpool = nn.AdaptiveAvgPool2d(1)
+        self.maxpool = nn.AdaptiveMaxPool2d(1)
+        self.shared = sharedMLP(in_channels)
+        self.Conv_Squeeze = nn.Conv2d(in_channels, in_channels // 2,
+                                      kernel_size=1, bias=False)
+        self.Conv_Excitation = nn.Conv2d(in_channels // 2, in_channels,
+                                         kernel_size=1, bias=False)
+        self.norm = nn.Sigmoid()
+
+    def forward(self, U):
+        z_avg = self.avgpool(U).squeeze(3).squeeze(2)  # (batch_size, in_channels)
+        z_max = self.maxpool(U).squeeze(3).squeeze(2)  # (batch_size, in_channels)
+        z = self.shared(z_avg, z_max)
+        z = self.Conv_Squeeze(z.unsqueeze(2).unsqueeze(3))  # 4次元テンソルに戻す
+        z = self.Conv_Excitation(z)
+        freqAtten = z
+        freqAtten = torch.squeeze(freqAtten, 3)
+        z = self.norm(z)
+        # In addition, return to freqAtten for visualization
+        return U * z.expand_as(U)
+
+class sfAttention(nn.Module):
+    def __init__(self, in_channels):
+        super().__init__()
+
+        self.frequencyAttention = frequencyAttention(in_channels)
+        self.spatialAttention = spatialAttention(in_channels)
+       
+    def forward(self, U):
+        U_cse = self.frequencyAttention(U)
+        U_sse = self.spatialAttention(U)
+        
+        # Return new 4D features
+        # and the Frequency Attention and Spatial_Attention
+        return U_cse + U_sse
 
 # Toshi-Net:
 # Attention module + DSC module + transformer module
@@ -483,8 +552,8 @@ class select_net(nn.Module):
         self.conv3 = nn.Conv1d(64, 48, kernel_size=3, padding=1)
         self.batchnorm3 = nn.BatchNorm1d(48, False)
         self.conv4 = nn.Conv1d(48, 64, kernel_size=3, padding=1)
-        self.conv5 = nn.Conv1d(64, 64, kernel_size=3, padding=1)
-      
+        self.Atten = sfAttention(in_channels=17) 
+        
         #transformer
         config = Config()
         self.transformer = TransformerEncoder(config)
@@ -493,7 +562,7 @@ class select_net(nn.Module):
     def forward(self, x):
         #[batch、時系列、周波数、特徴量]→x=[150, 16, 3, 17]
         batch_size, seq_len, freq_bands, node_dim = x.shape  # 各次元のサイズを取得
-        
+
         x_skip = x.view(batch_size, -1, node_dim)
         x1 = x.view(batch_size, -1, node_dim)
         x1 = self.conv1(x1)
@@ -503,12 +572,15 @@ class select_net(nn.Module):
         x1 = self.conv3(x2)
 
         x = x_skip + x1
-
         x = self.conv4(x)
-        #x = self.conv5(x)
         x = x + x2
-        x = x.permute(0, 2, 1)#[150, 17, 16, 3]
- 
+        
+        x = x.reshape(batch_size, 8, 8, node_dim)
+        
+        x = x.permute(0, 3, 1, 2)
+        x = self.Atten(x)   
+        
+        x = x.view(batch_size, node_dim, -1)
         
         #Transformer
         # 出力とアテンション重みの取得

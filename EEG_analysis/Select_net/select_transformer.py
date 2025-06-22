@@ -511,7 +511,7 @@ class select_net(nn.Module):
               
         #x = x.view(batch_size, -1, node_dim) #[150, 17, 48]
         #x = x.permute(0, 2, 1)
-        
+        print(x.shape)
         #Transformer
         #out = self.transformer(out)
         # 出力とアテンション重みの取得
